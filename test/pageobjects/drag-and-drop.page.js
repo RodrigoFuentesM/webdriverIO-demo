@@ -15,23 +15,24 @@ class DragAndDropPage extends Page {
    * Drag box A to box B
    */
   async dragColumnAToColumnB() {
-    /* await (await this.columnA).waitForDisplayed();
-    await (await this.columnA).dragAndDrop(await this.columnB); */
+    const element = await $('#column-a');
+    const target = await $('#column-b');
+    await element.waitForDisplayed();
+    await target.waitForDisplayed();
+    await element.dragAndDrop(target);
     
-    await browser.performActions([{
+/*     await browser.performActions([{
       type: 'pointer',
       id: 'finger1',
       parameters: { pointerType: 'mouse' },
       actions: [
         { type: 'pointerMove', duration: 0, origin: (await this.columnA), x: 0, y: 0 },
         { type: 'pointerDown', button: 0 },
-        //{ type: 'pause', duration: 10 }, // emulate human pause
-        { type: 'pointerMove', duration: 10, origin: (await this.columnB), x: 0, y: 0 }
-        //{ type: 'pointerMove', duration: 10, origin: (await this.columnB), x: 0, y: 0 },
-        //{ type: 'pause', duration: 10 }, // emulate human pause
-        //{ type: 'pointerUp', button: 0 }
+        { type: 'pause', duration: 10 }, // emulate human pause
+        { type: 'pointerMove', duration: 10, origin: (await this.columnB), x: 0, y: 0 },
+        { type: 'pointerUp', button: 0 }
       ]
-    }]).then(async() => (await this.columnB).click());
+    }]).then(async() => (await this.columnB).click()); */
   }; 
 };
 
