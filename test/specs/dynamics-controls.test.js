@@ -1,23 +1,33 @@
-const DynamicControls = require('../pageobjects/dynamic-controls.page')
+const dynamicControlsPage = require('../pageobjects/dynamic-controls.page')
 
 describe('Dynamics Controls', () => {
 
   it('should wait for the input field to be enabled', async() => {
-    await DynamicControls.open();  
+    await dynamicControlsPage.open();  
     
-    await DynamicControls.clickEnableButton();
-    await DynamicControls.inputEnabledFiled.waitForEnabled({timeout: 4000});
+    await dynamicControlsPage.clickEnableButton();
+    await dynamicControlsPage.inputEnabledFiled.waitForEnabled({timeout: 4000});
 
-    await expect(DynamicControls.inputEnabledFiled).toBeEnabled();
-    await expect(DynamicControls.enableButton).toHaveAttrContaining('autocomplete', 'off');
-    await expect(DynamicControls.pageFooter).toHaveHrefContaining('elemental');
+    await expect(dynamicControlsPage.inputEnabledFiled).toBeEnabled();
+    await expect(dynamicControlsPage.enableButton).toHaveAttrContaining('autocomplete', 'off');
+    await expect(dynamicControlsPage.pageFooter).toHaveHrefContaining('elemental');
   });
 
   it('should wait for the input field to be disabled', async() => {
-    await DynamicControls.clickEnableButton();
-    await DynamicControls.inputEnabledFiled.waitForEnabled({timeout: 4000, reverse: true});
+    await dynamicControlsPage.clickEnableButton();
+    await dynamicControlsPage.inputEnabledFiled.waitForEnabled({timeout: 6000, reverse: true});
 
-    expect(DynamicControls.inputEnabledFiled).not.toBeEnabled();
+    expect(dynamicControlsPage.inputEnabledFiled).not.toBeEnabled();
     
   }); 
+
+  it('should wait until the button text changes' , async() => {
+    await dynamicControlsPage.open();
+    await dynamicControlsPage.clickCheckboxButton();
+    await browser.waitUntil(
+      async() => await (await dynamicControlsPage.checkBoxButton).getText() === 'Add',
+      6000, 'Expect button to change'
+    );
+    await expect(await dynamicControlsPage.checkBoxButton)
+  });
 });
