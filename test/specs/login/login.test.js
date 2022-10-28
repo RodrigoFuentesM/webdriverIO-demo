@@ -1,5 +1,5 @@
-const loginPage = require('../pageobjects/login.page');
-const securePage = require('../pageobjects/secure.page');
+const loginPage = require('../../pageobjects/login.page');
+const securePage = require('../../pageobjects/secure.page');
 
 describe('My Login application', () => {
     it('should login with valid credentials', async () => {
