@@ -9,8 +9,9 @@ class MultipleWindowsPage extends Page {
   * Click the 'Click here' link 
   */
   async clickNewWindow() {
-    await (await this.newWindowLink).waitForDisplayed();
-    await (await this.newWindowLink).click();
+    //await (await this.newWindowLink).waitForDisplayed();
+    //await (await this.newWindowLink).click();
+    await this.waitAndClick(this.newWindowLink);
   };
 
   /**
